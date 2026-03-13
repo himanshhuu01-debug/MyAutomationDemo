@@ -1,0 +1,1 @@
+{"name": "test_TC02_page_title_after_login", "status": "skipped", "description": "Login ke baad page title sahi hona chahiye", "start": 1772651331548, "stop": 1772651331548, "uuid": "5397cce3-fb38-4b7f-91f1-9cbc94aeb470", "testCaseId": "4bd972f15d8722f52d805206736e66b0", "fullName": "tests.test_login#test_TC02_page_title_after_login", "titlePath": ["tests", "test_login.py"]}
