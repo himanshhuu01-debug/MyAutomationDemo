@@ -3,21 +3,31 @@ pipeline {
 
     stages {
 
-        stage('Clone Repo') {
+        stage('Setup Python Environment') {
             steps {
-                git branch: 'main', url: 'https://github.com/himanshhuu01-debug/MyAutomationDemo.git'
+                bat '''
+                python -m venv venv
+                venv\\Scripts\\activate
+                python -m pip install --upgrade pip
+                '''
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r requirements.txt'
+                bat '''
+                venv\\Scripts\\activate
+                pip install -r requirements.txt
+                '''
             }
         }
 
-        stage('Run Pytest') {
+        stage('Run Tests') {
             steps {
-                bat 'python -m pytest tests --alluredir=allure-results'
+                bat '''
+                venv\\Scripts\\activate
+                pytest tests --alluredir=allure-results
+                '''
             }
         }
 
@@ -27,5 +37,11 @@ pipeline {
             }
         }
 
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'allure-results/*', fingerprint: true
+        }
     }
 }
