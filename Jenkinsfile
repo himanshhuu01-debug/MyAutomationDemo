@@ -7,12 +7,16 @@ pipeline {
     }
 
     stages {
+        stage('Clone Repo') {
+            steps {
+                git branch: 'main', url: 'https://github.com/himanshhuu01-debug/MyAutomationDemo.git'
+            }
+        }
+
         stage('Setup Python Environment') {
             steps {
-                bat '''
-                    "%PYTHON%" -m venv "%VENV_DIR%"
-                    "%VENV_DIR%\\Scripts\\python.exe" -m pip install --upgrade pip
-                '''
+                bat '"%PYTHON%" -m venv "%VENV_DIR%"'
+                bat '"%VENV_DIR%\\Scripts\\python.exe" -m pip install --upgrade pip'
             }
         }
 
