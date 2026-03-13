@@ -15,14 +15,21 @@ pipeline {
 
         stage('Setup Python Environment') {
             steps {
-                bat '"%PYTHON%" -m venv "%VENV_DIR%"'
-                bat '"%VENV_DIR%\\Scripts\\python.exe" -m pip install --upgrade pip'
+                bat '''
+                    IF NOT EXIST "%VENV_DIR%\\Scripts\\python.exe" (
+                        echo Creating virtual environment...
+                        "%PYTHON%" -m venv "%VENV_DIR%"
+                    ) ELSE (
+                        echo Venv already exists, skipping creation...
+                    )
+                    "%VENV_DIR%\\Scripts\\python.exe" -m pip install --upgrade pip --quiet
+                '''
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat '"%VENV_DIR%\\Scripts\\python.exe" -m pip install -r requirements.txt'
+                bat '"%VENV_DIR%\\Scripts\\python.exe" -m pip install -r requirements.txt --quiet'
             }
         }
 
