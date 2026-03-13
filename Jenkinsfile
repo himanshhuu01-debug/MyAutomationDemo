@@ -15,21 +15,16 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat '''
-                venv\\Scripts\\activate
-                pip install -r requirements.txt
-                '''
+                bat '"C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Tests') {
             steps {
-                bat '''
-                venv\\Scripts\\activate
-                pytest tests --alluredir=allure-results
-                '''
+                bat '"C:\\Users\\Himanshu\\AppData\\Local\\Programs\\Python\\Python311\\python.exe" -m pytest tests --alluredir=allure-results'
             }
         }
+
 
         stage('Generate Allure Report') {
             steps {
