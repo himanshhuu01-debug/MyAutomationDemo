@@ -11,13 +11,13 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                bat 'python -m pip install -r requirements.txt'
             }
         }
 
         stage('Run Pytest') {
             steps {
-                bat 'pytest tests --alluredir=allure-results'
+                bat 'python -m pytest tests --alluredir=allure-results'
             }
         }
 
