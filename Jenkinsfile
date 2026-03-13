@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone Repo') {
             steps {
-                git 'https://github.com/himanshhuu01-debug/MyAutomationDemo.git'
+                git branch: 'main', url: 'https://github.com/himanshhuu01-debug/MyAutomationDemo.git'
             }
         }
 
